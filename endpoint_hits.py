@@ -38,9 +38,31 @@ class EndpointHitCounter:
         for endpoint, count in self.endpoint_counts.items():
             print(f"{endpoint}: {count} hits")
 
-# Example usage
+
 if __name__ == "__main__":
-    log_path = './NodeJsApp.log'
-    counter = EndpointHitCounter(log_path)
-    counter.count_hits()
-    counter.display_results()
+    import os
+    import sys
+    
+    default_log = './NodeJsApp.log'
+    log_path = default_log
+    
+    while True:
+        try:
+            if not os.path.exists(log_path):
+                print(f"Error: Log file not found at {log_path}")
+                log_path = input("Please enter correct log file path (or 'q' to quit): ")
+                if log_path.lower() == 'q':
+                    sys.exit(0)
+                continue
+            
+            counter = EndpointHitCounter(log_path)
+            counter.count_hits()
+            counter.display_results()
+            break
+            
+        except Exception as e:
+            print(f"Error occurred: {str(e)}")
+            retry = input("Try again with different file? (y/n): ")
+            if retry.lower() != 'y':
+                sys.exit(1)
+            log_path = input("Enter new log file path: ")

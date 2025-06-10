@@ -1,62 +1,58 @@
 
-# Log File Analyzer
+# 📊 Log File Analyzer
 
-A Python toolkit for analyzing web server log files with three specialized modules.
+Python toolkit for analyzing web server logs with robust error handling and user-friendly prompts.
+
+## 🛠️ Enhanced Features
+- **Smart Error Recovery**: Auto-prompts for correct path when files are missing
+- **User-Friendly**: Clear instructions and validation for file inputs
+- **Graceful Exits**: Clean error messages and proper exit codes
 
 ## 📦 Modules
 
-1. **Endpoint Hit Counter**  
-   - Counts URL endpoint access frequency
-   - `endpoint_hits.py`
-
-2. **User Agent Analyzer**  
-   - Tracks client device/browser distribution  
-   - `req_per_agent.py`
-
-3. **Request Pattern Detector**  
-   - Identifies potential DDoS patterns by IP request frequency  
-   - `request_in_10_secs.py`
-
-## 🛠️ Setup
-
-```bash
-git clone https://github.com/guderian120/log-file-analyzer.git
-cd log-file-analyzer
-```
+| Script | Description | Error Handling |
+|--------|-------------|----------------|
+| `endpoint_hits.py` | Counts URL endpoint frequency | ✔️ Auto-retry with new path |
+| `req_per_agent.py` | Analyzes user agent distribution | ✔️ Keyboard interrupt support |
+| `request_in_10_secs.py` | Detects request bursts by IP | ✔️ Interactive path input |
 
 ## 🚀 Usage
-
-```python
-# Endpoint analysis
-python endpoint_hits.py NodeJsApp.log
-
-# User agent analysis 
-python req_per_agent.py NodeJsApp.log
-
-# Request burst detection
-python request_in_10_secs.py NodeJsApp.log
+```bash
+# All scripts now handle missing files interactively
+python endpoint_hits.py
+python req_per_agent.py  
+python request_in_10_secs.py
 ```
 
-## 📊 Sample Output
+**Sample Error Recovery Flow**:
+```bash
+$ python endpoint_hits.py
+Error: Log file not found at ./NodeJsApp.log
+Please enter correct log file path (or 'q' to quit): ../logs/myapp.log
+/api/users: 215 hits
+...
+```
 
-```
-/api/users: 142 hits
-Chrome/91.0: 85 requests 
-192.168.1.1: 24 requests in 10s window
-```
+## 🛡️ Error Cases Handled
+- Missing log files
+- Invalid file paths  
+- Keyboard interrupts (Ctrl+C)
+- Permission errors
+- Empty/malformed log files
 
 ## 📝 Requirements
-- Python 3.8+
-- Standard library only (no external dependencies)
-
-## 🏗️ Structure
-```
-log-file-analyzer/
-├── endpoint_hits.py
-├── req_per_agent.py
-├── request_in_10_secs.py
-├── helper.py
-└── NodeJsApp.log (sample)
+```text
+Python 3.8+
+No external dependencies
 ```
 
----
+## 🏗️ Project Structure
+```bash
+.
+├── endpoint_hits.py      # With interactive path recovery
+├── req_per_agent.py      # User agent analyzer
+├── request_in_10_secs.py # Burst detection
+├── helper.py            # Shared log parser
+└── NodeJsApp.log        # Sample log
+```
+

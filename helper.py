@@ -22,7 +22,6 @@ class LogParser:
             try:
                 data['timestamp'] = datetime.strptime(data['timestamp'], "%Y-%m-%dT%H:%M:%S.%fZ")
             except ValueError:
-                # If timestamp format doesn't match, you can choose to return None or leave it as a string
                 return None
             return data
         return None

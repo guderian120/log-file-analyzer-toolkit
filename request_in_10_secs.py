@@ -41,9 +41,27 @@ class RequestAnalyzer:
         for ip, count in results.items():
             print(f"{ip}: {count} requests in {window_seconds}s after first")
 
-# Example usage
 if __name__ == "__main__":
-    log_path = './NodeJsApp.log'
-    analyzer = RequestAnalyzer(log_path)
-    analyzer.parse_log_file()
-    analyzer.print_results(window_seconds=10)
+    import os
+    import sys
+    
+    def get_valid_path():
+        while True:
+            path = input("Enter log file path: ").strip()
+            if os.path.isfile(path):
+                return path
+            print(f"File not found: {path}")
+    
+    try:
+        log_path = './NodeJsApp.log'
+        if not os.path.exists(log_path):
+            print("Default log file not found")
+            log_path = get_valid_path()
+        
+        analyzer = RequestAnalyzer(log_path)
+        analyzer.parse_log_file()
+        analyzer.print_results(window_seconds=10)
+        
+    except Exception as e:
+        print(f"Analysis failed: {e}", file=sys.stderr)
+        sys.exit(1)

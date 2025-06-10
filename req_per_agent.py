@@ -39,9 +39,29 @@ class UserAgentRequestCounter:
         for user_agent, count in self.user_agent_counts.items():
             print(f"{user_agent}: {count} requests")
 
-# Example usage
 if __name__ == "__main__":
+    import os
+    import sys
+    
     log_path = './NodeJsApp.log'
-    counter = UserAgentRequestCounter(log_path)
-    counter.count_requests()
-    counter.display_results()
+    
+    while True:
+        try:
+            if not os.path.isfile(log_path):
+                print(f"Log file not found at: {log_path}")
+                log_path = input("Enter path to log file (or press Enter to use default): ").strip()
+                if not log_path:
+                    log_path = './NodeJsApp.log'
+                    continue
+            
+            counter = UserAgentRequestCounter(log_path)
+            counter.count_requests()
+            counter.display_results()
+            break
+            
+        except KeyboardInterrupt:
+            print("\nOperation cancelled by user")
+            sys.exit(0)
+        except Exception as e:
+            print(f"Error: {e}")
+            sys.exit(1)
