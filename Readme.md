@@ -16,6 +16,14 @@ Python toolkit for analyzing web server logs with robust error handling and user
 | `req_per_agent.py` | Analyzes user agent distribution | ✔️ Keyboard interrupt support |
 | `request_in_10_secs.py` | Detects request bursts by IP | ✔️ Interactive path input |
 
+
+## Requests in 10 Seconds
+![Requests In 10 Secs](media/request_in_10_sec.png)
+
+## Request per user agent
+![Requests Per Image](media/request_per_agent.png)
+
+
 ## Clone the repo
 ```bash
 git clone   https://github.com/guderian120/log-file-analyzer-toolkit.git
@@ -37,6 +45,7 @@ Please enter correct log file path (or 'q' to quit): ../logs/myapp.log
 /api/users: 215 hits
 ...
 ```
+![Error Image](media/error_handle.png)
 
 ## 🛡️ Error Cases Handled
 - Missing log files
@@ -44,6 +53,7 @@ Please enter correct log file path (or 'q' to quit): ../logs/myapp.log
 - Keyboard interrupts (Ctrl+C)
 - Permission errors
 - Empty/malformed log files
+
 
 ## 📝 Requirements
 ```text

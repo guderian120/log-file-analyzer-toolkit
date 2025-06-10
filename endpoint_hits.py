@@ -43,7 +43,7 @@ if __name__ == "__main__":
     import os
     import sys
     
-    default_log = './NodeJsApp.log'
+    default_log = './NodeJspp.log'
     log_path = default_log
     
     while True:
